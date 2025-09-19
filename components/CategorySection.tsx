@@ -30,7 +30,8 @@ export function CategorySection({ title, description, tools, categoryKey }: Cate
             <Card className="group h-full bg-gradient-premium backdrop-blur-glass border border-white/10 hover:border-primary/30 transition-all duration-500 hover:scale-105 hover:shadow-luxury cursor-pointer">
               <CardHeader className="pb-3">
                 <div className="flex items-center gap-3 mb-2">
-                  <div className="p-2 rounded-lg bg-gradient-hero/10 group-hover:bg-gradient-hero/20 transition-colors duration-300">
+                  <div className="relative p-2 rounded-lg overflow-hidden">
+                    <span className="pointer-events-none absolute inset-0 bg-gradient-hero opacity-10 group-hover:opacity-20 transition-opacity duration-300" />
                     {tool.icon}
                   </div>
                   <CardTitle className="text-lg font-bold group-hover:text-primary transition-colors duration-300">

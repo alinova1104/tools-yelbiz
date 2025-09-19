@@ -8,7 +8,10 @@
     "build:dev": "vite build --mode development",
     "dev": "vite",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "next": "next dev",
+    "next:build": "next build",
+    "next:start": "next start"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
@@ -41,6 +44,7 @@
     "@radix-ui/react-tooltip": "latest",
     "@tanstack/react-query": "latest",
     "@vercel/analytics": "latest",
+    "ajv": "^8.17.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "latest",
@@ -52,7 +56,7 @@
     "less": "latest",
     "lightningcss": "latest",
     "lucide-react": "^0.454.0",
-    "next": "15.2.4",
+    "next": "^15.5.3",
     "next-themes": "latest",
     "path": "latest",
     "react": "^19",

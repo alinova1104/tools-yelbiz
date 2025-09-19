@@ -20,6 +20,7 @@ interface SearchContextType {
   searchTerm: string
   setSearchTerm: (term: string) => void
   filteredCategories: Category[]
+  categoriesLength: number
 }
 
 const SearchContext = createContext<SearchContextType | undefined>(undefined)
@@ -44,8 +45,9 @@ export function SearchProvider({
     }))
     .filter((category) => category.tools.length > 0)
 
+const categoriesLength = categories.reduce((acc, category) => acc + category.tools.length, 0)
   return (
-    <SearchContext.Provider value={{ searchTerm, setSearchTerm, filteredCategories }}>
+    <SearchContext.Provider value={{ searchTerm, setSearchTerm, filteredCategories, categoriesLength }}>
       {children}
     </SearchContext.Provider>
   )
@@ -53,6 +55,7 @@ export function SearchProvider({
 
 export function useSearch() {
   const context = useContext(SearchContext)
+  console.log(context);
   if (context === undefined) {
     throw new Error("useSearch must be used within a SearchProvider")
   }
