@@ -9,6 +9,8 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  output: "export", // Statik dışa aktarma
+  reactStrictMode: true, // React strict modunu etkinleştir
 }
 
 export default nextConfig

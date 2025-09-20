@@ -1,3 +1,4 @@
+"use client"
 import {
   Search,
   Code,
@@ -39,9 +40,139 @@ import {
 import { CategorySection } from "@/components/CategorySection"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { SearchProvider } from "@/components/SearchProvider"
+import { SearchProvider, useSearch } from "@/components/SearchProvider"
 
-export default function Page() {
+{/*
+function HomeContent() {
+  const { searchTerm, setSearchTerm, filteredCategories } = useSearch()
+  const totalTools = filteredCategories.reduce((acc, c) => acc + c.tools.length, 0)
+  return (
+    <div className="min-h-screen bg-background">
+      <header className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <div className="pointer-events-none absolute inset-0">
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-black via-black/95 to-black"></div>
+          <div className="pointer-events-none absolute top-1/4 -left-1/4 w-1/2 h-1/2 rounded-full bg-gradient-hero opacity-20 blur-hero animate-float-elegant"></div>
+          <div className="pointer-events-none absolute bottom-1/4 -right-1/4 w-1/2 h-1/2 rounded-full bg-gradient-hero opacity-15 blur-hero animate-float-elegant" style={{ animationDelay: "4s" }}></div>
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+        </div>
+        <div className="relative z-10 container mx-auto px-6 text-center">
+          <div className="max-w-6xl mx-auto">
+            <div className="mb-12 animate-fade-in-up">
+              <span className="inline-flex items-center px-6 py-3 rounded-full bg-gradient-premium backdrop-blur-glass text-primary text-sm font-bold border border-white/10 hover:border-primary/30 transition-all duration-500 hover:scale-105 animate-pulse-glow">✨ {totalTools}+ Premium Developer Tools</span>
+            </div>
+            <div className="mb-12 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
+              <h1 className="text-7xl md:text-8xl lg:text-9xl font-black mb-6 leading-none">
+                <span className="block bg-gradient-hero bg-clip-text text-transparent animate-gradient-x bg-[length:400%_400%]">Tools</span>
+                <span className="block text-white/90 -mt-4">Hub</span>
+              </h1>
+            </div>
+            <div className="mb-16 animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
+              <p className="text-2xl md:text-3xl text-white/60 max-w-4xl mx-auto leading-relaxed font-light">Professional developer tools designed for <span className="text-transparent bg-gradient-hero bg-clip-text font-semibold"> modern workflows</span></p>
+              <p className="text-lg text-white/40 mt-4 max-w-2xl mx-auto">Fast, secure, and completely free. No registration required.</p>
+            </div>
+            <div className="mb-16 animate-fade-in-up" style={{ animationDelay: "0.6s" }}>
+              <div className="max-w-2xl mx-auto relative group">
+                <div className="absolute inset-0 bg-gradient-hero opacity-20 rounded-3xl blur-lg group-focus-within:opacity-40 transition-opacity duration-500"></div>
+                <div className="relative">
+                  <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 text-white/40 h-6 w-6 group-focus-within:text-primary transition-colors duration-300" />
+                  <Input type="text" placeholder="Search for tools..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="pl-14 pr-6 py-6 text-lg bg-gradient-premium backdrop-blur-glass border border-white/10 focus:border-primary/50 focus:ring-2 focus:ring-primary/20 rounded-3xl text-white placeholder:text-white/40" />
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-wrap justify-center gap-6 animate-fade-in-up" style={{ animationDelay: "0.8s" }}>
+              <Button size="lg" className="relative overflow-hidden bg-gradient-hero hover:shadow-luxury transition-all duration-700 hover:scale-110 px-12 py-4 text-lg font-bold rounded-2xl group">
+                <span className="relative z-10">Explore Tools</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+              </Button>
+              <Button variant="outline" size="lg" className="relative overflow-hidden border-white/20 bg-gradient-premium backdrop-blur-glass hover:border-primary/30 hover:text-primary transition-all duration-500 px-12 py-4 text-lg font-semibold rounded-2xl hover:scale-105 group">
+                <span className="relative z-10">Browse Categories</span>
+                <span className="pointer-events-none absolute inset-0 bg-gradient-glass opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              </Button>
+            </div>
+          </div>
+        </div>
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <div className="w-6 h-10 border-2 border-white/20 rounded-full flex justify-center">
+            <div className="w-1 h-3 bg-gradient-hero rounded-full mt-2 animate-pulse"></div>
+          </div>
+        </div>
+      </header>
+      <section className="relative py-20 border-b border-white/5">
+        <div className="container mx-auto px-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
+            <div className="animate-slide-up group cursor-pointer">
+              <div className="text-4xl md:text-5xl font-black bg-gradient-hero bg-clip-text text-transparent mb-3 group-hover:scale-110 transition-transform duration-300">{totalTools}+</div>
+              <div className="text-white/60 font-medium">Premium Tools</div>
+            </div>
+            <div className="animate-slide-up group cursor-pointer" style={{ animationDelay: "0.1s" }}>
+              <div className="text-4xl md:text-5xl font-black bg-gradient-hero bg-clip-text text-transparent mb-3 group-hover:scale-110 transition-transform duration-300">10</div>
+              <div className="text-white/60 font-medium">Categories</div>
+            </div>
+            <div className="animate-slide-up group cursor-pointer" style={{ animationDelay: "0.2s" }}>
+              <div className="text-4xl md:text-5xl font-black bg-gradient-hero bg-clip-text text-transparent mb-3 group-hover:scale-110 transition-transform duration-300">100%</div>
+              <div className="text-white/60 font-medium">Free Forever</div>
+            </div>
+            <div className="animate-slide-up group cursor-pointer" style={{ animationDelay: "0.3s" }}>
+              <div className="text-4xl md:text-5xl font-black bg-gradient-hero bg-clip-text text-transparent mb-3 group-hover:scale-110 transition-transform duration-300">24/7</div>
+              <div className="text-white/60 font-medium">Available</div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <main className="container mx-auto px-4 py-20">
+        <div className="space-y-20">
+          {filteredCategories.map((category, index) => (
+            <div key={category.categoryKey} className="animate-fade-in-up" style={{ animationDelay: `${index * 0.1}s` }}>
+              <CategorySection title={category.title} description={category.description} tools={category.tools} categoryKey={category.categoryKey} />
+            </div>
+          ))}
+        </div>
+      </main>
+      <footer className="border-t border-white/10 bg-gradient-secondary">
+        <div className="container mx-auto px-4 py-16">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+            <div className="space-y-4">
+              <h3 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">Tools.Yelbiz</h3>
+              <p className="text-muted-foreground leading-relaxed">Geliştiriciler ve dijital profesyoneller için tasarlanmış kapsamlı araç koleksiyonu. Modern, hızlı ve güvenilir çözümler.</p>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-6 text-lg">Popüler Araçlar</h4>
+              <ul className="space-y-3 text-muted-foreground">
+                <li className="hover:text-primary transition-colors cursor-pointer">JSON Formatter</li>
+                <li className="hover:text-primary transition-colors cursor-pointer">PDF Merger</li>
+                <li className="hover:text-primary transition-colors cursor-pointer">QR Code Generator</li>
+                <li className="hover:text-primary transition-colors cursor-pointer">Password Generator</li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-6 text-lg">Kategoriler</h4>
+              <ul className="space-y-3 text-muted-foreground">
+                <li className="hover:text-primary transition-colors cursor-pointer">Text & Content</li>
+                <li className="hover:text-primary transition-colors cursor-pointer">Image & Media</li>
+                <li className="hover:text-primary transition-colors cursor-pointer">Code & Development</li>
+                <li className="hover:text-primary transition-colors cursor-pointer">Security & Privacy</li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-6 text-lg">İletişim</h4>
+              <div className="space-y-3 text-muted-foreground">
+                <p>tools.yelbiz.com.tr</p>
+                <p>Professional tools for developers</p>
+              </div>
+            </div>
+          </div>
+          <div className="border-t border-white/10 pt-8 text-center">
+            <p className="text-muted-foreground">© 2024 Yelbiz Tools. Tüm hakları saklıdır.<span className="text-primary ml-2">Made with ❤️ for developers</span></p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  )
+}
+
+*/}
+
+export default function PageProvider() {
   const categories = [
     {
       title: "SEO Tools",
@@ -430,7 +561,7 @@ export default function Page() {
           title: "Unix Timestamp Converter",
           description: "Unix zaman damgası dönüştürücü",
           icon: <Clock className="h-5 w-5" />,
-          href: "/time/unix-converter",
+          href: "/time/timestamp-converter",
         },
         {
           title: "World Clock",
@@ -589,208 +720,216 @@ export default function Page() {
       ],
     },
   ]
-
-  const totalTools = categories.reduce((acc, category) => acc + category.tools.length, 0)
-
   return (
     <SearchProvider categories={categories}>
-      <div className="min-h-screen bg-background">
-        {/* Hero Section */}
-        <header className="relative min-h-screen flex items-center justify-center overflow-hidden">
-          {/* Background Elements */}
-          <div className="absolute inset-0">
-            <div className="absolute inset-0 bg-gradient-to-br from-black via-black/95 to-black"></div>
-            <div className="absolute top-1/4 -left-1/4 w-1/2 h-1/2 rounded-full bg-gradient-hero opacity-20 blur-hero animate-float-elegant"></div>
-            <div
-              className="absolute bottom-1/4 -right-1/4 w-1/2 h-1/2 rounded-full bg-gradient-hero opacity-15 blur-hero animate-float-elegant"
-              style={{ animationDelay: "4s" }}
-            ></div>
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
-          </div>
+      <Page />
+    </SearchProvider>
+  );
+}
 
-          {/* Content */}
-          <div className="relative z-10 container mx-auto px-6 text-center">
-            <div className="max-w-6xl mx-auto">
-              {/* Badge */}
-              <div className="mb-12 animate-fade-in-up">
-                <span className="inline-flex items-center px-6 py-3 rounded-full bg-gradient-premium backdrop-blur-glass text-primary text-sm font-bold border border-white/10 hover:border-primary/30 transition-all duration-500 hover:scale-105 animate-pulse-glow">
-                  ✨ {totalTools}+ Premium Developer Tools
+function Page() {
+
+  const { searchTerm, setSearchTerm, filteredCategories, categoriesLength } = useSearch()
+
+  return (
+    <div className="min-h-screen bg-background">
+      {/* Hero Section */}
+      <header className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-gradient-to-br from-black via-black/95 to-black"></div>
+          <div className="absolute top-1/4 -left-1/4 w-1/2 h-1/2 rounded-full bg-gradient-hero opacity-20 blur-hero animate-float-elegant"></div>
+          <div
+            className="absolute bottom-1/4 -right-1/4 w-1/2 h-1/2 rounded-full bg-gradient-hero opacity-15 blur-hero animate-float-elegant"
+            style={{ animationDelay: "4s" }}
+          ></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+        </div>
+
+        {/* Content */}
+        <div className="relative z-10 container mx-auto px-6 text-center">
+          <div className="max-w-6xl mx-auto">
+            {/* Badge */}
+            <div className="mb-12 animate-fade-in-up">
+              <span className="inline-flex items-center px-6 py-3 rounded-full bg-gradient-premium backdrop-blur-glass text-primary text-sm font-bold border border-white/10 hover:border-primary/30 transition-all duration-500 hover:scale-105 animate-pulse-glow">
+                ✨ {categoriesLength}+ Premium Developer Tools
+              </span>
+            </div>
+
+            {/* Main Title */}
+            <div className="mb-12 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
+              <h1 className="text-7xl md:text-8xl lg:text-9xl font-black mb-6 leading-none">
+                <span className="block bg-gradient-hero bg-clip-text text-transparent animate-gradient-x bg-[length:400%_400%]">
+                  Tools
                 </span>
-              </div>
-
-              {/* Main Title */}
-              <div className="mb-12 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-                <h1 className="text-7xl md:text-8xl lg:text-9xl font-black mb-6 leading-none">
-                  <span className="block bg-gradient-hero bg-clip-text text-transparent animate-gradient-x bg-[length:400%_400%]">
-                    Tools
-                  </span>
-                  <span className="block text-white/90 -mt-4">Hub</span>
-                </h1>
-              </div>
-
-              {/* Subtitle */}
-              <div className="mb-16 animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
-                <p className="text-2xl md:text-3xl text-white/60 max-w-4xl mx-auto leading-relaxed font-light">
-                  Professional developer tools designed for
-                  <span className="text-transparent bg-gradient-hero bg-clip-text font-semibold">
-                    {" "}
-                    modern workflows
-                  </span>
-                </p>
-                <p className="text-lg text-white/40 mt-4 max-w-2xl mx-auto">
-                  Fast, secure, and completely free. No registration required.
-                </p>
-              </div>
-
-              {/* Search Bar */}
-              <div className="mb-16 animate-fade-in-up" style={{ animationDelay: "0.6s" }}>
-                <div className="max-w-2xl mx-auto relative group">
-                  <div className="absolute inset-0 bg-gradient-hero opacity-20 rounded-3xl blur-lg group-focus-within:opacity-40 transition-opacity duration-500"></div>
-                  <div className="relative">
-                    <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 text-white/40 h-6 w-6 group-focus-within:text-primary transition-colors duration-300" />
-                    <Input
-                      type="text"
-                      placeholder="Search for tools..."
-                      className="pl-14 pr-6 py-6 text-lg bg-gradient-premium backdrop-blur-glass border border-white/10 focus:border-primary/50 focus:ring-2 focus:ring-primary/20 rounded-3xl text-white placeholder:text-white/40"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* CTA Buttons */}
-              <div
-                className="flex flex-wrap justify-center gap-6 animate-fade-in-up"
-                style={{ animationDelay: "0.8s" }}
-              >
-                <Button
-                  size="lg"
-                  className="relative overflow-hidden bg-gradient-hero hover:shadow-luxury transition-all duration-700 hover:scale-110 px-12 py-4 text-lg font-bold rounded-2xl group"
-                >
-                  <span className="relative z-10">Explore Tools</span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
-                </Button>
-
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="border-white/20 bg-gradient-premium backdrop-blur-glass hover:bg-gradient-glass hover:border-primary/30 hover:text-primary transition-all duration-500 px-12 py-4 text-lg font-semibold rounded-2xl hover:scale-105"
-                >
-                  Browse Categories
-                </Button>
-              </div>
-            </div>
-          </div>
-
-          {/* Scroll Indicator */}
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-            <div className="w-6 h-10 border-2 border-white/20 rounded-full flex justify-center">
-              <div className="w-1 h-3 bg-gradient-hero rounded-full mt-2 animate-pulse"></div>
-            </div>
-          </div>
-        </header>
-
-        {/* Stats Section */}
-        <section className="relative py-20 border-b border-white/5">
-          <div className="container mx-auto px-6">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
-              <div className="animate-slide-up group cursor-pointer">
-                <div className="text-4xl md:text-5xl font-black bg-gradient-hero bg-clip-text text-transparent mb-3 group-hover:scale-110 transition-transform duration-300">
-                  {totalTools}+
-                </div>
-                <div className="text-white/60 font-medium">Premium Tools</div>
-              </div>
-              <div className="animate-slide-up group cursor-pointer" style={{ animationDelay: "0.1s" }}>
-                <div className="text-4xl md:text-5xl font-black bg-gradient-hero bg-clip-text text-transparent mb-3 group-hover:scale-110 transition-transform duration-300">
-                  10
-                </div>
-                <div className="text-white/60 font-medium">Categories</div>
-              </div>
-              <div className="animate-slide-up group cursor-pointer" style={{ animationDelay: "0.2s" }}>
-                <div className="text-4xl md:text-5xl font-black bg-gradient-hero bg-clip-text text-transparent mb-3 group-hover:scale-110 transition-transform duration-300">
-                  100%
-                </div>
-                <div className="text-white/60 font-medium">Free Forever</div>
-              </div>
-              <div className="animate-slide-up group cursor-pointer" style={{ animationDelay: "0.3s" }}>
-                <div className="text-4xl md:text-5xl font-black bg-gradient-hero bg-clip-text text-transparent mb-3 group-hover:scale-110 transition-transform duration-300">
-                  24/7
-                </div>
-                <div className="text-white/60 font-medium">Available</div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Tools Categories */}
-        <main className="container mx-auto px-4 py-20">
-          <div className="space-y-20">
-            {categories.map((category, index) => (
-              <div
-                key={category.categoryKey}
-                className="animate-fade-in-up"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <CategorySection
-                  title={category.title}
-                  description={category.description}
-                  tools={category.tools}
-                  categoryKey={category.categoryKey}
-                />
-              </div>
-            ))}
-          </div>
-        </main>
-
-        {/* Footer */}
-        <footer className="border-t border-white/10 bg-gradient-secondary">
-          <div className="container mx-auto px-4 py-16">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-              <div className="space-y-4">
-                <h3 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">Tools.Yelbiz</h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  Geliştiriciler ve dijital profesyoneller için tasarlanmış kapsamlı araç koleksiyonu. Modern, hızlı ve
-                  güvenilir çözümler.
-                </p>
-              </div>
-
-              <div>
-                <h4 className="font-semibold mb-6 text-lg">Popüler Araçlar</h4>
-                <ul className="space-y-3 text-muted-foreground">
-                  <li className="hover:text-primary transition-colors cursor-pointer">JSON Formatter</li>
-                  <li className="hover:text-primary transition-colors cursor-pointer">PDF Merger</li>
-                  <li className="hover:text-primary transition-colors cursor-pointer">QR Code Generator</li>
-                  <li className="hover:text-primary transition-colors cursor-pointer">Password Generator</li>
-                </ul>
-              </div>
-
-              <div>
-                <h4 className="font-semibold mb-6 text-lg">Kategoriler</h4>
-                <ul className="space-y-3 text-muted-foreground">
-                  <li className="hover:text-primary transition-colors cursor-pointer">Text & Content</li>
-                  <li className="hover:text-primary transition-colors cursor-pointer">Image & Media</li>
-                  <li className="hover:text-primary transition-colors cursor-pointer">Code & Development</li>
-                  <li className="hover:text-primary transition-colors cursor-pointer">Security & Privacy</li>
-                </ul>
-              </div>
-
-              <div>
-                <h4 className="font-semibold mb-6 text-lg">İletişim</h4>
-                <div className="space-y-3 text-muted-foreground">
-                  <p>tools.yelbiz.com.tr</p>
-                  <p>Professional tools for developers</p>
-                </div>
-              </div>
+                <span className="block text-white/90 -mt-4">Hub</span>
+              </h1>
             </div>
 
-            <div className="border-t border-white/10 pt-8 text-center">
-              <p className="text-muted-foreground">
-                © 2024 Yelbiz Tools. Tüm hakları saklıdır.
-                <span className="text-primary ml-2">Made with ❤️ for developers</span>
+            {/* Subtitle */}
+            <div className="mb-16 animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
+              <p className="text-2xl md:text-3xl text-white/60 max-w-4xl mx-auto leading-relaxed font-light">
+                Professional developer tools designed for
+                <span className="text-transparent bg-gradient-hero bg-clip-text font-semibold">
+                  {" "}
+                  modern workflows
+                </span>
+              </p>
+              <p className="text-lg text-white/40 mt-4 max-w-2xl mx-auto">
+                Fast, secure, and completely free. No registration required.
               </p>
             </div>
+
+            {/* Search Bar */}
+            <div className="mb-16 animate-fade-in-up" style={{ animationDelay: "0.6s" }}>
+              <div className="max-w-2xl mx-auto relative group">
+                <div className="absolute inset-0 bg-gradient-hero opacity-20 rounded-3xl blur-lg group-focus-within:opacity-40 transition-opacity duration-500"></div>
+                <div className="relative">
+                  <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 text-white/40 h-6 w-6 group-focus-within:text-primary transition-colors duration-300" />
+                  <Input
+                    type="text"
+                    placeholder="Search for tools..."
+                    value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}
+                    className="pl-14 pr-6 py-6 text-lg bg-gradient-premium backdrop-blur-glass border border-white/10 focus:border-primary/50 focus:ring-2 focus:ring-primary/20 rounded-3xl text-white placeholder:text-white/40"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* CTA Buttons */}
+            <div
+              className="flex flex-wrap justify-center gap-6 animate-fade-in-up"
+              style={{ animationDelay: "0.8s" }}
+            >
+              <Button
+                size="lg"
+                className="relative overflow-hidden bg-gradient-hero hover:shadow-luxury transition-all duration-700 hover:scale-110 px-12 py-4 text-lg font-bold rounded-2xl group"
+              >
+                <span className="relative z-10">Explore Tools</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+              </Button>
+
+              <Button
+                variant="outline"
+                size="lg"
+                className="relative overflow-hidden border-white/20 bg-gradient-premium backdrop-blur-glass hover:border-primary/30 hover:text-primary transition-all duration-500 px-12 py-4 text-lg font-semibold rounded-2xl hover:scale-105 group"
+              >
+                <span className="relative z-10">Browse Categories</span>
+                <span className="pointer-events-none absolute inset-0 bg-gradient-glass opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              </Button>
+            </div>
           </div>
-        </footer>
-      </div>
-    </SearchProvider>
+        </div>
+
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <div className="w-6 h-10 border-2 border-white/20 rounded-full flex justify-center">
+            <div className="w-1 h-3 bg-gradient-hero rounded-full mt-2 animate-pulse"></div>
+          </div>
+        </div>
+      </header>
+
+      {/* Stats Section */}
+      <section className="relative py-20 border-b border-white/5">
+        <div className="container mx-auto px-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
+            <div className="animate-slide-up group cursor-pointer">
+              <div className="text-4xl md:text-5xl font-black bg-gradient-hero bg-clip-text text-transparent mb-3 group-hover:scale-110 transition-transform duration-300">
+                {categoriesLength}+
+              </div>
+              <div className="text-white/60 font-medium">Premium Tools</div>
+            </div>
+            <div className="animate-slide-up group cursor-pointer" style={{ animationDelay: "0.1s" }}>
+              <div className="text-4xl md:text-5xl font-black bg-gradient-hero bg-clip-text text-transparent mb-3 group-hover:scale-110 transition-transform duration-300">
+                10
+              </div>
+              <div className="text-white/60 font-medium">Categories</div>
+            </div>
+            <div className="animate-slide-up group cursor-pointer" style={{ animationDelay: "0.2s" }}>
+              <div className="text-4xl md:text-5xl font-black bg-gradient-hero bg-clip-text text-transparent mb-3 group-hover:scale-110 transition-transform duration-300">
+                100%
+              </div>
+              <div className="text-white/60 font-medium">Free Forever</div>
+            </div>
+            <div className="animate-slide-up group cursor-pointer" style={{ animationDelay: "0.3s" }}>
+              <div className="text-4xl md:text-5xl font-black bg-gradient-hero bg-clip-text text-transparent mb-3 group-hover:scale-110 transition-transform duration-300">
+                24/7
+              </div>
+              <div className="text-white/60 font-medium">Available</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Tools Categories */}
+      <main className="container mx-auto px-4 py-20">
+        <div className="space-y-20">
+          {filteredCategories.map((category, index) => (
+            <div
+              key={category.categoryKey}
+              className="animate-fade-in-up"
+              style={{ animationDelay: `${index * 0.1}s` }}
+            >
+              <CategorySection
+                title={category.title}
+                description={category.description}
+                tools={category.tools}
+                categoryKey={category.categoryKey}
+              />
+            </div>
+          ))}
+        </div>
+      </main>
+
+      {/* Footer */}
+      <footer className="border-t border-white/10 bg-gradient-secondary">
+        <div className="container mx-auto px-4 py-16">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+            <div className="space-y-4">
+              <h3 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">Tools.Yelbiz</h3>
+              <p className="text-muted-foreground leading-relaxed">
+                Geliştiriciler ve dijital profesyoneller için tasarlanmış kapsamlı araç koleksiyonu. Modern, hızlı ve
+                güvenilir çözümler.
+              </p>
+            </div>
+
+            <div>
+              <h4 className="font-semibold mb-6 text-lg">Popüler Araçlar</h4>
+              <ul className="space-y-3 text-muted-foreground">
+                <li className="hover:text-primary transition-colors cursor-pointer">JSON Formatter</li>
+                <li className="hover:text-primary transition-colors cursor-pointer">PDF Merger</li>
+                <li className="hover:text-primary transition-colors cursor-pointer">QR Code Generator</li>
+                <li className="hover:text-primary transition-colors cursor-pointer">Password Generator</li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="font-semibold mb-6 text-lg">Kategoriler</h4>
+              <ul className="space-y-3 text-muted-foreground">
+                <li className="hover:text-primary transition-colors cursor-pointer">Text & Content</li>
+                <li className="hover:text-primary transition-colors cursor-pointer">Image & Media</li>
+                <li className="hover:text-primary transition-colors cursor-pointer">Code & Development</li>
+                <li className="hover:text-primary transition-colors cursor-pointer">Security & Privacy</li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="font-semibold mb-6 text-lg">İletişim</h4>
+              <div className="space-y-3 text-muted-foreground">
+                <p>tools.yelbiz.com.tr</p>
+                <p>Professional tools for developers</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="border-t border-white/10 pt-8 text-center">
+            <p className="text-muted-foreground">
+              © 2024 Yelbiz Tools. Tüm hakları saklıdır.
+              <span className="text-primary ml-2">Made with ❤️ for developers</span>
+            </p>
+          </div>
+        </div>
+      </footer>
+    </div>
   )
 }
