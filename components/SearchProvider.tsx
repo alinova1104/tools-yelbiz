@@ -55,7 +55,6 @@ const categoriesLength = categories.reduce((acc, category) => acc + category.too
 
 export function useSearch() {
   const context = useContext(SearchContext)
-  console.log(context);
   if (context === undefined) {
     throw new Error("useSearch must be used within a SearchProvider")
   }

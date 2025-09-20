@@ -728,6 +728,13 @@ export default function PageProvider() {
 }
 
 function Page() {
+  const handleScrollDown = () => {
+    // Sayfayı yavaşça aşağıya kaydırmak için smooth scroll kullanıyoruz
+    window.scrollTo({
+      top: window.innerHeight, // sayfanın yüksekliği kadar aşağı kaydır
+      behavior: 'smooth' // yavaş kaydırma
+    });
+  };
 
   const { searchTerm, setSearchTerm, filteredCategories, categoriesLength } = useSearch()
 
@@ -785,7 +792,7 @@ function Page() {
               <div className="max-w-2xl mx-auto relative group">
                 <div className="absolute inset-0 bg-gradient-hero opacity-20 rounded-3xl blur-lg group-focus-within:opacity-40 transition-opacity duration-500"></div>
                 <div className="relative">
-                  <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 text-white/40 h-6 w-6 group-focus-within:text-primary transition-colors duration-300" />
+                  <Search className="absolute z-10 left-6 top-1/2 transform -translate-y-1/2 text-white/40 h-6 w-6 group-focus-within:text-primary transition-colors duration-300" />
                   <Input
                     type="text"
                     placeholder="Search for tools..."
@@ -797,37 +804,59 @@ function Page() {
             </div>
 
             {/* CTA Buttons */}
-            <div
-              className="flex flex-wrap justify-center gap-6 animate-fade-in-up"
-              style={{ animationDelay: "0.8s" }}
-            >
+            <div className="flex flex-wrap justify-center gap-6 animate-fade-in-up" style={{ animationDelay: "0.8s" }}>
               <Button
                 size="lg"
-                className="relative overflow-hidden bg-gradient-hero hover:shadow-luxury transition-all duration-700 hover:scale-110 px-12 py-4 text-lg font-bold rounded-2xl group"
+                onClick={() => {
+                  const toolsSection = document.querySelector("main")
+                  toolsSection?.scrollIntoView({ behavior: "smooth" })
+                }}
+                className="relative overflow-hidden bg-gradient-hero hover:shadow-luxury transition-all duration-700 hover:scale-110 px-12 py-4 text-lg font-bold rounded-2xl group cursor-pointer"
               >
-                <span className="relative z-10">Explore Tools</span>
+                <span className="relative z-10">Start Using Tools</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
               </Button>
 
               <Button
                 variant="outline"
                 size="lg"
-                className="relative overflow-hidden border-white/20 bg-gradient-premium backdrop-blur-glass hover:border-primary/30 hover:text-primary transition-all duration-500 px-12 py-4 text-lg font-semibold rounded-2xl hover:scale-105 group"
+                onClick={() => window.open("https://github.com/cumaliyelbiz/tools-yelbiz", "_blank")}
+                className="relative overflow-hidden border-white/20 bg-gradient-premium backdrop-blur-glass hover:border-primary/30 hover:text-primary transition-all duration-500 px-12 py-4 text-lg font-semibold rounded-2xl hover:scale-105 group cursor-pointer"
               >
-                <span className="relative z-10">Browse Categories</span>
+                <span className="relative z-10">View Source</span>
                 <span className="pointer-events-none absolute inset-0 bg-gradient-glass opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </Button>
             </div>
+
           </div>
         </div>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-white/20 rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-gradient-hero rounded-full mt-2 animate-pulse"></div>
+        <div
+          className="fixed bottom-8 right-8 flex justify-center cursor-pointer group"
+          onClick={handleScrollDown} // Ok simgesine tıklanınca aşağı kaydırma işlemi yapılacak
+        >
+          <div className="w-8 h-8 flex justify-center items-center border-2 border-white/20 rounded-full relative animate-pulse">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-6 h-6 text-white group-hover:text-primary transform group-hover:scale-110 transition-all duration-300"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
           </div>
+          {/* Hover Animation */}
+          <div className="absolute top-0 left-0 w-8 h-8 rounded-full bg-gradient-hero opacity-30 group-hover:opacity-50 group-hover:scale-110 transition-all duration-500" />
         </div>
+
       </header>
+
 
       {/* Stats Section */}
       <section className="relative py-20 border-b border-white/5">
