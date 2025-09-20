@@ -792,7 +792,7 @@ function Page() {
               <div className="max-w-2xl mx-auto relative group">
                 <div className="absolute inset-0 bg-gradient-hero opacity-20 rounded-3xl blur-lg group-focus-within:opacity-40 transition-opacity duration-500"></div>
                 <div className="relative">
-                  <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 text-white/40 h-6 w-6 group-focus-within:text-primary transition-colors duration-300" />
+                  <Search className="absolute z-10 left-6 top-1/2 transform -translate-y-1/2 text-white/40 h-6 w-6 group-focus-within:text-primary transition-colors duration-300" />
                   <Input
                     type="text"
                     placeholder="Search for tools..."
